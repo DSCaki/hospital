@@ -42,7 +42,14 @@ class Admincontroller extends Controller
     public function showappointment()
     {
         $data=appointment::all();
-        return view('admin.showappointment', compact('data'));
+        
+        // Fetch appointments where 'is_new' is true
+        $apnts = Appointment::where('status', 'In progress')->get();
+        
+        // After fetching, mark them as seen
+        Appointment::where('is_new', true)->update(['is_new' => false]);
+        
+        return view('admin.showappointment', compact('data', 'apnts'));
     }
 
     public function approved($id)
@@ -98,6 +105,7 @@ class Admincontroller extends Controller
         $doctor->phone = $request->number;
         $doctor->room = $request->room;
         $doctor->speciality = $request->speciality;
+        $doctor->availability = $request->input('availability'); 
 
         $doctor->save();
         return redirect('/showdoctor')->with('message','Doctor Details Updated Successfully');
@@ -197,5 +205,6 @@ class Admincontroller extends Controller
         $data->save();
         return redirect('/showblog')->with('message','Blog Details Updated Successfully');
     }
+
 
 }

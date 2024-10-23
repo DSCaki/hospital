@@ -95,40 +95,48 @@
         <div class="col-md-8 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
-              <div class="d-flex flex-row justify-content-between">
-                <h4 class="card-title mb-1">New Appointments</h4>
-                <p class="text-muted mb-1">Data status</p>
-              </div>
+                <div class="d-flex flex-row justify-content-between">
+                    <h4 class="card-title mb-1">New Appointments</h4>
+                    <p class="text-muted mb-1">Data status</p>
+                </div>
 
-              <div class="row">
-                <div class="col-12">
-                    <div style="height: 50vh;" class="table-responsive">
-                        <div class="preview-list">
-                            @foreach ($apnts as $appoint)
-                            @if ($appoint->status === 'In progress')
-                            <div class="preview-item border-bottom">
-                            <div class="preview-thumbnail">
-                                <div class="preview-icon bg-warning">
-                                <i class="mdi mdi-calendar-clock"></i>
-                                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div style="height: 50vh;" class="table-responsive">
+                            <div class="preview-list">
+                                @foreach ($apnts as $appoint)
+                                    @if ($appoint->status === 'In progress')
+                                        <div class="preview-item border-bottom">
+                                            <div class="preview-thumbnail">
+                                                <div class="preview-icon bg-warning">
+                                                    <i class="mdi mdi-calendar-clock"></i>
+                                                </div>
+                                            </div>
+                                            <div class="preview-item-content d-sm-flex flex-grow">
+                                                <div class="flex-grow">
+                                                    <h6 class="preview-subject">
+                                                        {{ $appoint->name }}
+                                                        @if ($appoint->is_new)
+                                                            <!-- Alert icon for new appointments -->
+                                                            <span class="text-danger ms-2">
+                                                                <i class="mdi mdi-alert-circle-outline"></i>
+                                                            </span>
+                                                        @endif
+                                                    </h6>
+                                                    <p class="text-muted mb-0">{{ $appoint->email }}</p>
+                                                </div>
+                                                <div class="me-auto text-sm-right pt-2 pt-sm-0">
+                                                    <p class="text-muted">{{ $appoint->created_at }}</p>
+                                                    <p class="text-muted mb-0">{{ $appoint->phone }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
                             </div>
-                            <div class="preview-item-content d-sm-flex flex-grow">
-                                <div class="flex-grow">
-                                <h6 class="preview-subject">{{$appoint->name}}</h6>
-                                <p class="text-muted mb-0">{{$appoint->email}}</p>
-                                </div>
-                                <div class="me-auto text-sm-right pt-2 pt-sm-0">
-                                <p class="text-muted">{{$appoint->created_at}}</p>
-                                <p class="text-muted mb-0">{{$appoint->phone}} </p>
-                                </div>
-                            </div>
-                            </div>
-                            @endif
-                            @endforeach
                         </div>
                     </div>
                 </div>
-              </div>
             </div>
           </div>
         </div>

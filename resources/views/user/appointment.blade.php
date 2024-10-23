@@ -26,9 +26,11 @@
 
                 @foreach ($doctor as $doctors)
 
-                <option value="{{$doctors->name}}">
-                    {{$doctors->name}} --- speciality to --- {{$doctors->speciality}}
-                </option>
+                    @if($doctors->availability == 1) <!-- Only show available doctors -->
+                    <option value="{{$doctors->name}}">
+                        {{$doctors->name}} --- speciality to --- {{$doctors->speciality}}
+                    </option>
+                    @endif
 
                 @endforeach
 

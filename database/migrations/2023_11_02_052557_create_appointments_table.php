@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('message')->nullable();
             $table->string('status')->nullable();
             $table->string('user_id')->nullable();
+            $table->boolean('is_new')->default(true);
             $table->timestamps();
         });
     }
